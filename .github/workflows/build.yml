@@ -26,11 +26,14 @@ jobs:
       - name: Generate Gradle Wrapper
         run: gradle wrapper --gradle-version 8.5
 
+      - name: Build Debug APK (auto-signed, ready to install)
+        run: ./gradlew assembleDebug --stacktrace
+
       - name: Build Release APK
         run: ./gradlew assembleRelease --stacktrace
 
       - name: List APK files
-        run: ls -la app/build/outputs/apk/release/
+        run: ls -la app/build/outputs/apk/debug/ app/build/outputs/apk/release/
 
       - name: Sign APK
         id: sign
@@ -48,5 +51,6 @@ jobs:
         with:
           name: kami-studio-apk
           path: |
+            app/build/outputs/apk/debug/*.apk
             app/build/outputs/apk/release/*.apk
             ${{ steps.sign.outputs.signedReleaseFile }}
