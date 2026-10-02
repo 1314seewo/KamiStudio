@@ -68,8 +68,8 @@ fun ManageScreen(dao: KamiDao) {
                     .clickable {
                         scope.launch {
                             val all = dao.getAll().first()
-                            val file = ExportHelper.exportToCsv(context, all, "kami_all")
-                            if (file != null) ExportHelper.shareFile(context, file)
+                            val saved = ExportHelper.exportToCsv(context, all, "kami_all")
+                            if (saved != null) ExportHelper.shareSavedFile(context, saved)
                         }
                     }
             )

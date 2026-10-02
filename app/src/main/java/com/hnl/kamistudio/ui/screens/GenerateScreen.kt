@@ -173,9 +173,9 @@ fun GenerateScreen(dao: KamiDao) {
                                 .clickable {
                                     scope.launch {
                                         val all = dao.getAll().first()
-                                        val file = ExportHelper.exportToTxt(context, all, batchName.ifEmpty { "kami_batch" })
-                                        if (file != null) {
-                                            ExportHelper.shareFile(context, file)
+                                        val saved = ExportHelper.exportToTxt(context, all, batchName.ifEmpty { "kami_batch" })
+                                        if (saved != null) {
+                                            ExportHelper.shareSavedFile(context, saved)
                                         }
                                     }
                                 })

@@ -300,14 +300,14 @@ fun InjectScreen() {
                             text = "导出注入包",
                             onClick = {
                                 scope.launch {
-                                    val zipFile = com.hnl.kamistudio.util.ExportHelper.exportInjectPackage(
+                                    val saved = com.hnl.kamistudio.util.ExportHelper.exportInjectPackage(
                                         context, generatedSmali, generatedManifest, generatedGuide, generatedProguard
                                     )
-                                    if (zipFile != null) {
-                                        Toast.makeText(context, "已保存到: Download/KamiStudio/${zipFile.name}", Toast.LENGTH_LONG).show()
-                                        com.hnl.kamistudio.util.ExportHelper.shareFile(context, zipFile)
+                                    if (saved != null) {
+                                        Toast.makeText(context, "已保存到: ${saved.filePath}", Toast.LENGTH_LONG).show()
+                                        com.hnl.kamistudio.util.ExportHelper.shareSavedFile(context, saved)
                                     } else {
-                                        Toast.makeText(context, "导出失败，请检查存储权限", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context, "导出失败", Toast.LENGTH_SHORT).show()
                                     }
                                 }
                             },
