@@ -63,8 +63,13 @@ dependencies {
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
-    // Coil for image loading
-    implementation("io.coil-kt:coil-compose:2.5.0")
+    // APK注入：dexlib2（smali汇编 + AXML二进制Manifest读写）
+    implementation("org.smali:dexlib2:2.5.2")
+    implementation("org.smali:smali:2.5.2")
+    // APK签名（Google官方，支持v1+v2）
+    implementation("com.android.tools.build:apksig:7.0.0")
+    // 证书生成
+    implementation("org.bouncycastle:bcpkix-jdk15on:1.70")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
