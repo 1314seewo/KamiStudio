@@ -26,6 +26,13 @@ jobs:
       - name: Generate Gradle Wrapper
         run: gradle wrapper --gradle-version 8.5
 
+      - name: Compile smali to dex (built-in kami verify module)
+        run: |
+          curl -sL -o /tmp/smali.jar https://github.com/JesusFreke/smali/releases/download/v2.5.2/smali-2.5.2.jar
+          mkdir -p app/src/main/assets/dex
+          java -jar /tmp/smali.jar assemble app/src/main/assets/smali -o app/src/main/assets/dex/kami_verify.dex
+          ls -la app/src/main/assets/dex/
+
       - name: Build Debug APK (auto-signed, ready to install)
         run: ./gradlew assembleDebug --stacktrace
 

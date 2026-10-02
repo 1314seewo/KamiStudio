@@ -63,5 +63,10 @@ dependencies {
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
+    // APK签名
+    implementation("com.android.tools.build:apksig:7.0.0")
+    // 证书生成
+    implementation("org.bouncycastle:bcpkix-jdk15on:1.70")
+
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
