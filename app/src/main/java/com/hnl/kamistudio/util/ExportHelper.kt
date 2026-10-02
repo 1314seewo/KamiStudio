@@ -26,7 +26,7 @@ object ExportHelper {
      * 保存文件到公共Downloads/KamiStudio目录
      * 返回文件的content:// URI（用于分享）和显示名
      */
-    private data class SavedFile(val uri: Uri, val displayName: String, val filePath: String)
+    data class SavedFile(val uri: Uri, val displayName: String, val filePath: String)
 
     private fun saveToDownloads(context: Context, fileName: String, mimeType: String, data: ByteArray): SavedFile? {
         return try {

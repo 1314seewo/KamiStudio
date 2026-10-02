@@ -82,15 +82,15 @@ fun SettingsScreen(dao: KamiDao, onSupportAuthor: () -> Unit) {
                 SettingRow("导出所有卡密（TXT）", Icons.Default.FileDownload, Color(0xFF55EFC4)) {
                     scope.launch {
                         val all = dao.getAll().first()
-                        val file = com.hnl.kamistudio.util.ExportHelper.exportToTxt(context, all, "kami_export")
-                        if (file != null) com.hnl.kamistudio.util.ExportHelper.shareFile(context, file)
+                        val saved = com.hnl.kamistudio.util.ExportHelper.exportToTxt(context, all, "kami_export")
+                        if (saved != null) com.hnl.kamistudio.util.ExportHelper.shareSavedFile(context, saved)
                     }
                 }
                 SettingRow("导出所有卡密（CSV）", Icons.Default.FileDownload, Color(0xFF74B9FF)) {
                     scope.launch {
                         val all = dao.getAll().first()
-                        val file = com.hnl.kamistudio.util.ExportHelper.exportToCsv(context, all, "kami_export")
-                        if (file != null) com.hnl.kamistudio.util.ExportHelper.shareFile(context, file)
+                        val saved = com.hnl.kamistudio.util.ExportHelper.exportToCsv(context, all, "kami_export")
+                        if (saved != null) com.hnl.kamistudio.util.ExportHelper.shareSavedFile(context, saved)
                     }
                 }
                 SettingRow("清空所有卡密数据", Icons.Default.DeleteForever, Color(0xFFE17055)) {
