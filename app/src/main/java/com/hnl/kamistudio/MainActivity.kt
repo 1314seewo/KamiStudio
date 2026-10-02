@@ -34,14 +34,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             KamiStudioTheme {
-                KamiApp()
+                KamiAppContent()
             }
         }
     }
 }
 
 @Composable
-fun KamiApp() {
+fun KamiAppContent() {
     val app = androidx.compose.ui.platform.LocalContext.current.applicationContext as KamiApp
     val dao = app.database.kamiDao()
     var currentRoute by remember { mutableStateOf("dashboard") }
