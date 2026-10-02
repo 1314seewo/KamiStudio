@@ -3,6 +3,7 @@ package com.hnl.kamistudio
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -18,12 +19,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import coil.compose.AsyncImage
 import com.hnl.kamistudio.ui.screens.*
 import com.hnl.kamistudio.ui.theme.KamiStudioTheme
 import com.hnl.kamistudio.ui.theme.GlassBackgroundStart
@@ -155,7 +156,7 @@ private fun SupportAuthorDialog(onDismiss: () -> Unit) {
                 Text("感谢你的支持，你的鼓励是我持续更新的动力", color = Color.White.copy(alpha = 0.6f), fontSize = 12.sp)
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // 赞赏码图片 - 使用内置资源
+                // 赞赏码图片 - 使用内置资源，无需网络
                 Box(
                     modifier = Modifier
                         .size(220.dp)
@@ -164,8 +165,8 @@ private fun SupportAuthorDialog(onDismiss: () -> Unit) {
                         .padding(8.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    AsyncImage(
-                        model = "https://aka.doubaocdn.com/s/lmUq8StK3E",
+                    Image(
+                        painter = painterResource(id = R.drawable.reward_qr),
                         contentDescription = "微信赞赏码",
                         contentScale = ContentScale.Fit,
                         modifier = Modifier.fillMaxSize()

@@ -73,6 +73,26 @@ fun InjectScreen() {
     ) {
         Text("APK卡密注入", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
 
+        // 功能说明
+        LiquidGlassCard(cornerRadius = 16.dp) {
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.Info, contentDescription = null, tint = Color(0xFF74B9FF), modifier = Modifier.size(18.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("使用说明", color = Color(0xFF74B9FF), fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
+                }
+                Text(
+                    "1. 配置下方参数 → 点击「生成卡密注入包」\n" +
+                    "2. 点击「导出注入包」，文件保存到 Download/KamiStudio/\n" +
+                    "3. 用 NP Manager 打开目标APK，按注入指南操作\n" +
+                    "4. 重新签名后安装，启动即显示卡密验证界面",
+                    color = Color.White.copy(alpha = 0.7f),
+                    fontSize = 11.sp,
+                    lineHeight = 16.sp
+                )
+            }
+        }
+
         // 验证界面配置
         LiquidGlassCard {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -113,14 +133,14 @@ fun InjectScreen() {
 
         // 生成按钮
         LiquidGlassButton(
-            text = "生成注入代码",
+            text = "生成卡密注入包",
             onClick = {
                 generatedSmali = SmaliGenerator.generateVerifyActivitySmali(config)
                 generatedManifest = SmaliGenerator.generateManifestConfig(config)
                 generatedGuide = SmaliGenerator.generateInjectGuide(config)
                 generatedProguard = SmaliGenerator.generateProguardRules()
                 showCode = true
-                Toast.makeText(context, "注入代码已生成", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "注入包已生成，可导出为zip", Toast.LENGTH_SHORT).show()
             },
             modifier = Modifier.fillMaxWidth()
         )
@@ -182,14 +202,17 @@ fun InjectScreen() {
                             modifier = Modifier.weight(1f)
                         )
                         LiquidGlassButton(
-                            text = "导出全部文件",
+                            text = "导出注入包",
                             onClick = {
                                 scope.launch {
-                                    val dir = com.hnl.kamistudio.util.ExportHelper.exportSmaliCode(
+                                    val zipFile = com.hnl.kamistudio.util.ExportHelper.exportInjectPackage(
                                         context, generatedSmali, generatedManifest, generatedGuide, generatedProguard
                                     )
-                                    if (dir != null) {
-                                        Toast.makeText(context, "已导出到: ${dir.absolutePath}", Toast.LENGTH_LONG).show()
+                                    if (zipFile != null) {
+                                        Toast.makeText(context, "已保存到: Download/KamiStudio/${zipFile.name}", Toast.LENGTH_LONG).show()
+                                        com.hnl.kamistudio.util.ExportHelper.shareFile(context, zipFile)
+                                    } else {
+                                        Toast.makeText(context, "导出失败，请检查存储权限", Toast.LENGTH_SHORT).show()
                                     }
                                 }
                             },
