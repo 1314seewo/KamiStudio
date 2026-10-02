@@ -218,9 +218,9 @@ object ApkInjector {
         ).build()
 
         val signer = com.android.apksig.ApkSigner.Builder(
-            listOf(signerConfig),
-            unsigned
+            listOf(signerConfig)
         )
+        signer.setInputApk(unsigned)
         signer.setOutputApk(output)
         signer.setV1SigningEnabled(true)
         signer.setV2SigningEnabled(true)

@@ -40,6 +40,7 @@ jobs:
           D8=$(find $ANDROID_HOME/build-tools -name "d8" | sort -V | tail -1)
           echo "Using d8: $D8"
           $D8 --output app/src/main/assets/dex/ /tmp/kami_classes/com/hnl/kamiverify/*.class
+          mv app/src/main/assets/dex/classes.dex app/src/main/assets/dex/kami_verify.dex
           ls -la app/src/main/assets/dex/
 
       - name: Build Debug APK (auto-signed, ready to install)
