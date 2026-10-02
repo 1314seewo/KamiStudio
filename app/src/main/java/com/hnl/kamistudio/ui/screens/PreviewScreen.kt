@@ -18,6 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import com.hnl.kamistudio.ui.components.LiquidGlassButton
 import com.hnl.kamistudio.ui.components.LiquidGlassCard
 import com.hnl.kamistudio.ui.components.LiquidGlassTextField
@@ -28,6 +30,7 @@ fun PreviewScreen(onSupportAuthor: () -> Unit) {
     var verifyState by remember { mutableStateOf(VerifyState.IDLE) }
     var title by remember { mutableStateOf("卡密验证") }
     var subtitle by remember { mutableStateOf("请输入卡密以继续使用") }
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -166,8 +169,8 @@ fun PreviewScreen(onSupportAuthor: () -> Unit) {
                                 .border(1.dp, Color(0x66FFFFFF), RoundedCornerShape(14.dp))
                                 .clickable {
                                     verifyState = VerifyState.LOADING
-                                    kotlinx.coroutines.GlobalScope.launch {
-                                        kotlinx.coroutines.delay(1500)
+                                    scope.launch {
+                                        delay(1500)
                                         verifyState = if (inputCode.length >= 8) VerifyState.SUCCESS else VerifyState.FAIL
                                     }
                                 }

@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hnl.kamistudio.data.KamiDao
 import com.hnl.kamistudio.ui.components.LiquidGlassCard
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.launch
 
 @Composable
@@ -125,7 +127,7 @@ fun SettingsScreen(dao: KamiDao, onSupportAuthor: () -> Unit) {
     // 清空确认弹窗
     if (showClearConfirm) {
         AlertDialog(
-            containerColor = Color(0xFF1A1A2E),
+            onDismissRequest = { showClearConfirm = false },
             title = { Text("确认清空", color = Color.White) },
             text = { Text("此操作将删除所有卡密数据，且无法恢复。确定继续吗？", color = Color.White.copy(alpha = 0.7f)) },
             confirmButton = {
