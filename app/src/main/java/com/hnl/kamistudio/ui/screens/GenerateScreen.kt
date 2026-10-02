@@ -27,6 +27,8 @@ import com.hnl.kamistudio.ui.components.LiquidGlassCard
 import com.hnl.kamistudio.ui.components.LiquidGlassTextField
 import com.hnl.kamistudio.util.ExportHelper
 import com.hnl.kamistudio.util.KamiGenerator
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.launch
 
 @Composable
